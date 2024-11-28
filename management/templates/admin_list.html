@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %} 
+{% block content %}
+
+<div class="container">
+  <div class="clearfix" style="margin-top: 45px">
+    <!-- You can add 'target="_blank"' to the following <a> tag to open 'Create New Department' in a new tab -->
+    <a href="/admin/create/" class="btn btn-success">
+      <i class="bi bi-plus-circle"></i>
+      Create New Admin
+    </a>
+
+    <div style="float: right">
+      <!-- method="GET" because we need to get the value of q on the url, if we use 'POST', then this would be done secretly -->
+      <form method="GET">
+        <div class="input-group mb-3">
+          <input type="text" name="q" value="{{ search_data }}" class="form-control" placeholder="Search for username..." aria-label="Search for..." aria-describedby="button-addon2" style="width: 350px;">
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div>
+    <div class="card" style="transform: translateY(-10px);">
+      <!-- Panel heading equivalent -->
+      <div class="card-header" style="font-weight: bolder">
+        <i class="bi bi-card-list"></i>
+        Admin List
+      </div>
+
+      <!-- Table content -->
+      <div class="card-body p-0">
+        <table class="table table-hover mb-0">
+          <thead style="text-align: center;">   
+            <tr>
+            {% for verbose_name in  fields %}
+              <th scope="col">{{ verbose_name }}</th>
+            {% endfor %}
+                <th scope="col">Operations</th>
+            </tr>
+    
+          </thead>
+          <tbody class="table-group-divider" style="text-align: center;">
+            {% for obj in queryset %}
+            <tr>
+              <th scope="row">{{ obj.id }}</th>
+              <td>{{ obj.username }}</td>
+              <td>*******</td>
+              <td>
+                <a
+                  href="/admin/{{ obj.id }}/edit/"
+                  class="btn btn-primary btn-xs"
+                >
+                  <i class="bi bi-pencil-square"></i>
+                  Edit
+                </a>
+
+                <a
+                  href="/admin/{{ obj.id }}/delete/"
+                  class="btn btn-danger btn-xs"
+                >
+                  <i class="bi bi-trash"></i>
+                  Delete
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div  class="pagination-container" style="display: flex; justify-content: center; margin-top: 5px;">
+    <nav aria-label="..." style="display: inline-flex; align-items: center; gap: 10px;">
+      <ul class="pagination mt-3 pagination-sm  ">
+        {{ page_string }}
+      </ul>
+    </nav>
+  </div>
+
+</div>
+
+{% endblock content %}

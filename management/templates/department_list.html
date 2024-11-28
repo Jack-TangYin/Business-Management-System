@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<!-- Program can work without <!DOCTYPE html>, it's there only to avoid VScode declaring error -->
+{% extends 'layout.html' %} 
+
+{% block content %}
+
+  <div class="container">
+    <div style="margin-top: 45px">
+      <!-- You can add 'target="_blank"' to the following <a> tag to open 'Create New Department' in a new tab -->
+      <a
+        href="/department/create/"
+        class="btn btn-success"
+      >
+        <i class="bi bi-plus-circle"></i>
+        Create New Department
+      </a>
+    </div>
+
+    <div>
+      <div class="card" style="margin-top: 10px">
+        <!-- Panel heading equivalent -->
+        <div class="card-header" style="font-weight: bolder">
+          <i class="bi bi-card-list"></i>
+          Department List
+        </div>
+
+        <!-- Table content -->
+        <div class="card-body p-0">
+          <table class="table table-hover mb-0">
+            <thead style="text-align: center;">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Department</th>
+                <th scope="col">Location</th>
+                <th scope="col">Operations</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider" style="text-align: center;">
+              {% for obj in queryset %}
+
+              <tr>
+                <th scope="row">{{ obj.id }}</th>
+                <td>{{ obj.name }}</td>
+                <td>{{ obj.location }}</td>
+                <td>
+                  <a
+                    href="/department/{{ obj.id }}/edit/"
+                    class="btn btn-primary btn-xs"
+                  >
+                    <i class="bi bi-pencil-square"></i>
+                    Edit
+                  </a>
+
+                  <a
+                    href="/department/delete/?nid={{ obj.id }}"
+                    class="btn btn-danger btn-xs"
+                  >
+                    <i class="bi bi-trash"></i>
+                    Delete
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div  class="pagination-container" style="display: flex; justify-content: center; margin-top: 5px;">
+      <nav aria-label="..." style="display: inline-flex; align-items: center; gap: 10px;">
+        <ul class="pagination mt-3 pagination-sm  ">
+          {{ page_string }}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+{% endblock content %}

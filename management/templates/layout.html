@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'plugins/bootstrap-5.3.3/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'plugins/bootstrap-5.3.3/bootstrap-icons/font/bootstrap-icons.css' %}"
+    />
+    <style>
+      .btn-xs {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg" style="background-color: rgb(248, 247, 247)">
+      <div class="container">
+        <a class="navbar-brand" href="/index">Management System</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Main navigation items on the left -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/list/">
+                Admin
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/department/list/">
+                Department
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/staff/list/">
+                Staff
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/task/list/">
+                Task
+                </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/order/list/">
+                Order
+              </a> 
+            </li>
+          </ul>
+
+          <!-- Right-aligned items with 'Jack' touching the edge -->
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            {% comment %} <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/login/"
+                >Sign in</a
+              >
+            </li> {% endcomment %}
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {{ request.session.user_info.name }}
+              </a>
+              <!-- Aligns dropdown menu within viewport -->
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="/logout/">Sign out</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div>
+      {% block content %} {% endblock content %}
+    </div>
+    <!-- JS files loaded here to ensure Bootstrap functionality -->
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-5.3.3/js/bootstrap.bundle.min.js' %}"></script>
+    {% block js %} {% endblock js %}
+  </body>
+</html>

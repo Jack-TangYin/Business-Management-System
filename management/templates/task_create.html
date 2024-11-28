@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %} 
+
+{% block content %}
+<div class="container">
+  <div class="card" style="margin-top: 30px">
+    <div class="card-header">
+      <h3 class="card-title" style="font-size: large">Create New Task</h3>
+    </div>
+    <div class="card-body">
+      <!-- You do not need to write action if you are submitting the form to the current page-->
+      <form method="POST" novalidate>
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div class="form-floating mb-3">
+            <!-- <input
+              type="text"
+              class="form-control"
+              id="staff_name"
+              placeholder="Name"
+              name="name"
+            /> -->
+            {{ field }}
+            <label for="floatingInput">{{ field.label }}</label>
+            <span style="color: red;">{{ field.errors.0 }}</span>
+          </div>
+        {% endfor %}
+ 
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="margin-top: 22.5px; margin-right: 22.5px"
+        >
+          Submit
+        </button>
+        <button type="reset" class="btn btn-primary" style="margin-top: 22.5px">
+          Reset
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

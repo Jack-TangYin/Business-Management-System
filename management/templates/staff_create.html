@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %} {% block content %}
+<div class="container">
+  <div class="card" style="margin-top: 30px">
+    <div class="card-header">
+      <h3 class="card-title" style="font-size: large">Create New Staff</h3>
+    </div>
+    <div class="card-body">
+      <!-- You do not need to write action if you are submitting the form to the current page-->
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="staff_name"
+            placeholder="Name"
+            name="name"
+          />
+          <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="staff_age"
+            placeholder="Age"
+            name="age"
+          />
+          <label for="floatingInput">Age</label>
+        </div>
+        <div class="form-floating mb-3">
+          <select
+            class="form-select"
+            id="staff_gender"
+            aria-label="Floating label select example"
+            name="gender"
+          >
+            <option selected>--Please choose an option--</option>
+            {% for item in gender_choices %}
+            <option value="{{ item.0 }}">{{ item.1 }}</option>
+            {% endfor %}
+          </select>
+          <label for="floatingSelect">Gender</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="staff_salary"
+            placeholder="Salary"
+            name="salary"
+          />
+          <label for="floatingInput">Salary (£)</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="staff_joining_date"
+            placeholder="Joining Date"
+            name="joining_date"
+          />
+          <label for="floatingInput">Joining Date (YYYY-MM-DD)</label>
+        </div>
+        <div class="form-floating mb-3">
+          <select
+            class="form-select"
+            id="staff_department"
+            aria-label="Floating label select example"
+            name="department"
+          >
+            <option selected>--Please choose an option--</option>
+            <!-- Get all department names from table 'management_department' via loop -->
+            <!-- This is dynamic and real-time, meaning that when a new department is created, it's name will be appeared on this select group -->
+            {% for obj in department_list %}
+            <option value="{{ obj.id }}">{{ obj.name }}</option>
+            {% endfor %}
+          </select>
+          <label for="floatingInput">Department</label>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="margin-top: 22.5px; margin-right: 22.5px"
+        >
+          Submit
+        </button>
+        <button type="reset" class="btn btn-primary" style="margin-top: 22.5px">
+          Reset
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

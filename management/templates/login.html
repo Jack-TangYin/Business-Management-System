@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'plugins/bootstrap-5.3.3/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'plugins/bootstrap-5.3.3/bootstrap-icons/font/bootstrap-icons.css' %}"
+    />
+  </head>
+  <body>
+    <div
+      class="container d-flex justify-content-center align-items-center min-vh-100"
+    >
+      <div class="card p-4 shadow rounded-3" style="width: 100%; max-width: 650px">
+        <h2 class="text-center mb-4">Sign in</h2>
+        <form method="post" novalidate>
+        {% csrf_token %}
+          <div class="form-floating mb-3">
+            {{ form.username }}
+            <label for="floatingInput">{{ form.username.label }}</label>
+            <span style="color: red">{{ form.username.errors.0 }}</span>
+          </div>
+          <div class="form-floating mb-3">
+            {{ form.password }}
+            <label for="floatingInput">{{ form.password.label }}</label>
+            <span style="color: red">{{ form.password.errors.0 }}</span>
+          </div>
+        
+        <div class="mb-3 d-flex align-items-center justify-content-between">
+          <div class="flex-grow-1">
+            {{ form.captcha }}
+            <span class="text-danger">{{ form.captcha.errors.0 }}</span>
+          </div>
+          <img id="image_code" src="/image/random/" class="img-fluid ms-3" style="width: 200px;">
+        </div>
+        
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe">
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+          </div>
+          <a href="#" class="text-decoration-none" style="color: #0d6efd;">Forgot password?</a>
+      </div>
+
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+        
+         <!-- Horizontal line with "or" text -->
+         <div class="d-flex align-items-center my-3">
+            <hr class="flex-grow-1">
+            <span class="mx-2">or</span>
+            <hr class="flex-grow-1">
+        </div>
+        
+        <!-- Continue with Gmail button -->
+        <button type="submit" class="btn btn-outline-danger w-100 rounded-3">
+            <img src="../static/img/icons8-google-96.png" alt="Google Icon" width="32" height="32" class="me-2">
+            Continue with Google
+        </button>
+        
+        <div class="text-center mt-3">
+            <a href="#" class="text-decoration-none" style="color: #0d6efd;">Don't have an account? Sign up</a>
+        </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JS files loaded here to ensure Bootstrap functionality -->
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-5.3.3/js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>

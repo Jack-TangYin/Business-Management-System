@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!-- Program can work without <!DOCTYPE html>, it's there only to avoid VScode declaring error -->
+{% extends 'layout.html' %} 
+
+{% block content %}
+  <div class="container">
+    <div class="card" style="margin-top: 30px">
+      <div class="card-header">
+        <h3 class="card-title" style="font-size: large">Create New Department</h3>
+      </div>
+      <div class="card-body">
+        <!-- You do not need to write action if you are submitting the form to the current page-->
+        <form method="POST" action="/department/create/">
+          {% csrf_token %}
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="Department Name"
+              name="name"
+            />
+            <label for="floatingInput">Department Name</label>
+          </div>
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Location"
+              name="location"
+            />
+            <label for="floatingPassword">Department Location</label>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="margin-top: 22.5px"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
